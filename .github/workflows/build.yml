@@ -18,6 +18,14 @@ jobs:
 
       - name: upload
         uses: actions/upload-artifact@v3
+        id: upload
         with:
           name: my-artifact
           path: ./staticFiles/test.txt
+      
+      - name: Artifact URL
+        id: set-output
+        run: echo "artifact_url=${{ steps.upload.outputs.artifact_url }}" >> $GITHUB_ENV
+      
+      - name: Display artifact url
+        run: echo "Artifact URL ; ${{ env.artifact_url}}"
